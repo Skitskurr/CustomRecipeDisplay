@@ -1,0 +1,12 @@
+main: com.skitskurr.customrecipedisplay.Main
+name: CustomRecipeDisplay
+version: 1.0
+description: A plugin for an overview of custom recipes of Data Packs.
+api-version: 1.15
+author: Skitskurr
+depend: [MenuManager]
+
+commands:
+  recipes:
+    description: Opens the recipe overview.
+    usage: /<command>
