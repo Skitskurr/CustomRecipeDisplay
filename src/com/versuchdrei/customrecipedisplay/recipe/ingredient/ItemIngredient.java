@@ -1,7 +1,12 @@
-package com.skitskurr.customrecipedisplay.recipe.ingredient;
+package com.versuchdrei.customrecipedisplay.recipe.ingredient;
 
 import org.bukkit.Material;
 
+/**
+ * a class representing a fixed ingredient
+ * @author VersuchDrei
+ * @version 1.0
+ */
 public class ItemIngredient implements Ingredient{
 	
 	private final Material type;

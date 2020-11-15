@@ -1,4 +1,4 @@
-package com.skitskurr.customrecipedisplay;
+package com.versuchdrei.customrecipedisplay;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +8,11 @@ import java.util.Set;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 
+/**
+ * a class that creates a map of all the tags in the default minecraft datapack
+ * @author VersuchDrei
+ * @version 1.0
+ */
 public class CustomRecipeDisplay {
 	
 	public static Map<String, Set<Material>> getTags() {

@@ -1,4 +1,4 @@
-package com.skitskurr.customrecipedisplay.recipe;
+package com.versuchdrei.customrecipedisplay.recipe;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -6,12 +6,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import com.skitskurr.customrecipedisplay.recipe.ingredient.Ingredient;
-import com.skitskurr.menumanager.ClickEvent;
-import com.skitskurr.menumanager.Menu;
-import com.skitskurr.menumanager.utils.ItemUtils;
-import com.skitskurr.menumanager.utils.MHFHead;
+import com.versuchdrei.customrecipedisplay.recipe.ingredient.Ingredient;
+import com.versuchdrei.menumanager.ClickEvent;
+import com.versuchdrei.menumanager.Menu;
+import com.versuchdrei.menumanager.utils.ItemUtils;
+import com.versuchdrei.menumanager.utils.MHFHead;
 
+/**
+ * a menu displaying a single recipe
+ * @author VersuchDrei
+ * @version 1.0
+ */
 public class Recipe extends Menu{
 	
 	private static final int ARROW_SLOT = 23;

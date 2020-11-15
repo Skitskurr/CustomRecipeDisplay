@@ -1,4 +1,4 @@
-package com.skitskurr.customrecipedisplay.datapack;
+package com.versuchdrei.customrecipedisplay.datapack;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,10 +8,15 @@ import java.util.Set;
 
 import org.bukkit.Material;
 
-import com.skitskurr.customrecipedisplay.FolderFilter;
-import com.skitskurr.customrecipedisplay.recipe.Recipe;
-import com.skitskurr.customrecipedisplay.recipe.ingredient.Ingredient;
+import com.versuchdrei.customrecipedisplay.FolderFilter;
+import com.versuchdrei.customrecipedisplay.recipe.Recipe;
+import com.versuchdrei.customrecipedisplay.recipe.ingredient.Ingredient;
 
+/**
+ * a class for representing a datapack
+ * @author VersuchDrei
+ * @version 1.0
+ */
 public class DataPack {
 	
 	private static final String DATA_PATH = "data/";

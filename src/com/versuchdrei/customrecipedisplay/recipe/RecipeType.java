@@ -1,5 +1,10 @@
-package com.skitskurr.customrecipedisplay.recipe;
+package com.versuchdrei.customrecipedisplay.recipe;
 
+/**
+ * an enum for the different types of recipes there are
+ * @author VersuchDrei
+ * @version 1.0
+ */
 public enum RecipeType {
 	CRAFTING_SHAPED,
 	CRAFTING_SHAPELESS,

@@ -1,4 +1,4 @@
-package com.skitskurr.customrecipedisplay;
+package com.versuchdrei.customrecipedisplay;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,15 +21,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.skitskurr.customrecipedisplay.datapack.DataPack;
-import com.skitskurr.customrecipedisplay.recipe.Recipe;
-import com.skitskurr.customrecipedisplay.recipe.RecipeType;
-import com.skitskurr.customrecipedisplay.recipe.ingredient.Ingredient;
-import com.skitskurr.customrecipedisplay.recipe.ingredient.TagIngredient;
-import com.skitskurr.customrecipedisplay.recipe.menu.RecipeMenu;
-import com.skitskurr.customrecipedisplay.recipe.menu.RecipeMenuItem;
-import com.skitskurr.menumanager.Menu;
+import com.versuchdrei.customrecipedisplay.datapack.DataPack;
+import com.versuchdrei.customrecipedisplay.recipe.Recipe;
+import com.versuchdrei.customrecipedisplay.recipe.RecipeType;
+import com.versuchdrei.customrecipedisplay.recipe.ingredient.Ingredient;
+import com.versuchdrei.customrecipedisplay.recipe.ingredient.TagIngredient;
+import com.versuchdrei.customrecipedisplay.recipe.menu.RecipeMenu;
+import com.versuchdrei.customrecipedisplay.recipe.menu.RecipeMenuItem;
+import com.versuchdrei.menumanager.Menu;
 
+/**
+ * the main class of the recipe display
+ * @author VersuchDrei
+ * @version 1.0
+ */
 public class Main extends JavaPlugin{
 	
 	private static final String SERVER_PROPERTIES_PATH = "server.properties";
@@ -60,8 +65,6 @@ public class Main extends JavaPlugin{
 			for(final DataPack datapack: datapackList) {
 				datapack.registerTags(tags);
 			}
-			
-			System.out.println("tags: " + tags.size());
 			
 			// ingredients
 			final Map<String, Ingredient> ingredients = new HashMap<>();

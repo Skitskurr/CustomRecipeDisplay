@@ -1,4 +1,4 @@
-package com.skitskurr.customrecipedisplay.recipe.menu;
+package com.versuchdrei.customrecipedisplay.recipe.menu;
 
 import java.util.List;
 import java.util.Map;
@@ -8,12 +8,17 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import com.skitskurr.customrecipedisplay.recipe.RecipeType;
-import com.skitskurr.menumanager.ClickEvent;
-import com.skitskurr.menumanager.Menu;
-import com.skitskurr.menumanager.implementations.FixedScrollableMenu;
-import com.skitskurr.menumanager.utils.ItemUtils;
+import com.versuchdrei.customrecipedisplay.recipe.RecipeType;
+import com.versuchdrei.menumanager.ClickEvent;
+import com.versuchdrei.menumanager.Menu;
+import com.versuchdrei.menumanager.implementations.FixedScrollableMenu;
+import com.versuchdrei.menumanager.utils.ItemUtils;
 
+/**
+ * the main menu containing sub menus for the different types of recipes
+ * @author VersuchDrei
+ * @version 1.0
+ */
 public class RecipeMenu extends Menu{
 	
 	private static final int CRAFTING_SHAPED_SLOT = 10;

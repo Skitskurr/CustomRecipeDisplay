@@ -1,4 +1,4 @@
-package com.skitskurr.customrecipedisplay.datapack;
+package com.versuchdrei.customrecipedisplay.datapack;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,12 +17,17 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.skitskurr.customrecipedisplay.JSONFilter;
-import com.skitskurr.customrecipedisplay.recipe.Recipe;
-import com.skitskurr.customrecipedisplay.recipe.RecipeType;
-import com.skitskurr.customrecipedisplay.recipe.ingredient.Ingredient;
-import com.skitskurr.customrecipedisplay.recipe.ingredient.ItemIngredient;
+import com.versuchdrei.customrecipedisplay.JSONFilter;
+import com.versuchdrei.customrecipedisplay.recipe.Recipe;
+import com.versuchdrei.customrecipedisplay.recipe.RecipeType;
+import com.versuchdrei.customrecipedisplay.recipe.ingredient.Ingredient;
+import com.versuchdrei.customrecipedisplay.recipe.ingredient.ItemIngredient;
 
+/**
+ * a class for representing a namespace
+ * @author VersuchDrei
+ * @version 1.0
+ */
 public class NameSpace {
 	
 	private static final String ITEM_TAG_PATH = "tags/items/";

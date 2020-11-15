@@ -1,9 +1,9 @@
-main: com.skitskurr.customrecipedisplay.Main
+main: com.versuchdrei.customrecipedisplay.Main
 name: CustomRecipeDisplay
 version: 1.0
 description: A plugin for an overview of custom recipes of Data Packs.
 api-version: 1.16
-author: Skitskurr
+author: VersuchDrei
 depend: [MenuManager]
 
 commands:
