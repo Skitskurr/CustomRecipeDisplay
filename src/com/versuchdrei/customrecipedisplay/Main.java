@@ -14,7 +14,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -57,8 +56,6 @@ public class Main extends JavaPlugin{
 			final List<DataPack> datapackList = Arrays.stream(datapacksFolder.list(new FolderFilter()))
 					.map(datapack -> new DataPack(datapacksPath + datapack + "/")).collect(Collectors.toList());
 			
-			System.out.println("datapacks: " + datapackList.size());
-			
 			// tags
 			final Map<String, Set<Material>> tags = CustomRecipeDisplay.getTags();
 			
@@ -72,15 +69,11 @@ public class Main extends JavaPlugin{
 				ingredients.put(entry.getKey(), new TagIngredient(entry.getValue().stream().toArray(Material[]::new)));
 			}
 			
-			Bukkit.broadcastMessage("ingredients: " + ingredients.size());
-			
 			// recipes
 			final List<Recipe> recipes = new ArrayList<>();
 			for(final DataPack datapack: datapackList) {
 				datapack.registerRecipes(recipes, ingredients);
 			}
-			
-			System.out.println("recipes: " + recipes.size());
 			
 			final Map<RecipeType, List<RecipeMenuItem>> menuItems = recipes.stream()
 					.map(recipe -> new RecipeMenuItem(recipe)).collect(Collectors.groupingBy(item -> item.getType()));
