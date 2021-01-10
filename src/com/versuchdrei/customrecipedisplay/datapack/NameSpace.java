@@ -1,17 +1,22 @@
 package com.versuchdrei.customrecipedisplay.datapack;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.libs.org.apache.commons.io.FilenameUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -22,6 +27,7 @@ import com.versuchdrei.customrecipedisplay.recipe.Recipe;
 import com.versuchdrei.customrecipedisplay.recipe.RecipeType;
 import com.versuchdrei.customrecipedisplay.recipe.ingredient.Ingredient;
 import com.versuchdrei.customrecipedisplay.recipe.ingredient.ItemIngredient;
+import com.versuchdrei.customrecipedisplay.utils.JarUtils;
 
 /**
  * a class for representing a namespace
@@ -32,6 +38,49 @@ public class NameSpace {
 	
 	private static final String ITEM_TAG_PATH = "tags/items/";
 	private static final String RECIPE_PATH = "recipes/";
+	private static final String VANILLA_NAMESPACE = "minecraft";
+	
+	public static Map<String, Tag> loadVanillaTags() {
+		final Map<String, Tag> tags = new HashMap<>();
+		
+		try {
+			final ZipFile jar = new ZipFile(JarUtils.getServerJarPath());
+			final String path = DataPack.DATA_PATH + NameSpace.VANILLA_NAMESPACE + "/" + NameSpace.ITEM_TAG_PATH;
+			
+			for(final Enumeration<? extends ZipEntry> enumeration = jar.entries(); enumeration.hasMoreElements();) {
+				final ZipEntry entry = enumeration.nextElement();
+				if(entry.isDirectory() || !entry.getName().startsWith(path) || !FilenameUtils.getExtension(entry.getName()).equals("json")) {
+					continue;
+				}
+				
+				NameSpace.registerTag(NameSpace.VANILLA_NAMESPACE, FilenameUtils.getBaseName(entry.getName()), new BufferedReader(new InputStreamReader(jar.getInputStream(entry))), tags);
+			}
+		} catch (final IOException | ParseException e) {
+			e.printStackTrace();
+		}
+		return tags;
+	}
+	
+	private static void registerTag(final String namespace, final String tag, final Reader reader, final Map<String, Tag> tags) throws IOException, ParseException {
+		final JSONParser parser = new JSONParser();
+		final JSONObject json = (JSONObject) parser.parse(reader);
+		
+		final String tagName = namespace + ":" + tag;
+		
+		if(!tags.containsKey(tagName)) {
+			tags.put(tagName, new Tag());
+		}
+		
+		final Tag tagObject = tags.get(tagName);
+		for(final Object tagType: (JSONArray) json.get("values")) {
+			final String tagString = (String) tagType;
+			if(tagString.startsWith("#")) {
+				tagObject.addTag(tagString.substring(1));
+			} else {
+				tagObject.addType(Material.valueOf(tagString.substring(tagString.lastIndexOf(':') + 1).toUpperCase()));
+			}
+		}
+	}
 	
 	private final String name;
 	private final String path;
@@ -41,7 +90,7 @@ public class NameSpace {
 		this.path = path;
 	}
 	
-	public void registerTags(final Map<String, Set<Material>> tags) {
+	public void registerTags(final Map<String, Tag> tags) {
 		final String tagsPath = this.path + NameSpace.ITEM_TAG_PATH;
 		final File folder = new File(tagsPath);
 		if(!folder.exists()) {
@@ -49,26 +98,9 @@ public class NameSpace {
 		}
 		
 		for(final String tag: folder.list(new JSONFilter())) {
-			try(FileReader reader = new FileReader(tagsPath + tag)){
-				final JSONParser parser = new JSONParser();
-				final JSONObject json = (JSONObject) parser.parse(reader);
-				
-				final String tagName = this.name + ":" + tag.substring(0, tag.lastIndexOf('.'));
-				
-				if(!tags.containsKey(tagName)) {
-					tags.put(tagName, new HashSet<>());
-				}
-				
-				final Set<Material> types = tags.get(tagName);
-				for(final Object tagType: (JSONArray) json.get("values")) {
-					final String tagString = (String) tagType;
-					types.add(Material.valueOf(tagString.substring(tagString.lastIndexOf(':') + 1).toUpperCase()));
-				}
-			} catch (final FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (final IOException e) {
-				e.printStackTrace();
-			} catch (final ParseException e) {
+			try(Reader reader = new FileReader(tagsPath + tag)){
+				NameSpace.registerTag(this.name, tag.substring(0, tag.lastIndexOf('.')), reader, tags);
+			} catch (final IOException | ParseException e) {
 				e.printStackTrace();
 			}
 		}
@@ -82,13 +114,13 @@ public class NameSpace {
 		}
 		
 		for(final String recipe: folder.list(new JSONFilter())) {
-			try(FileReader reader = new FileReader(recipesPath + recipe)){
+			try(Reader reader = new FileReader(recipesPath + recipe)){
 				final JSONParser parser = new JSONParser();
 				final JSONObject json = (JSONObject) parser.parse(reader);
 				
 				final String typeString = (String) json.get("type");
 				final RecipeType type = getType(typeString);
-				final boolean isReplacing = this.name.equals("minecraft");
+				final boolean isReplacing = this.name.equals(NameSpace.VANILLA_NAMESPACE);
 				
 				switch(typeString) {
 				case "minecraft:crafting_shaped":

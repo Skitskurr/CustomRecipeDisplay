@@ -4,9 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import org.bukkit.Material;
 
 import com.versuchdrei.customrecipedisplay.FolderFilter;
 import com.versuchdrei.customrecipedisplay.recipe.Recipe;
@@ -19,7 +16,7 @@ import com.versuchdrei.customrecipedisplay.recipe.ingredient.Ingredient;
  */
 public class DataPack {
 	
-	private static final String DATA_PATH = "data/";
+	static final String DATA_PATH = "data/";
 	
 	private final String path;
 	private final List<NameSpace> namespaces = new ArrayList<>();
@@ -44,7 +41,7 @@ public class DataPack {
 		}
 	}
 	
-	public void registerTags(final Map<String, Set<Material>> tags) {
+	public void registerTags(final Map<String, Tag> tags) {
 		for(final NameSpace namespace: namespaces) {
 			namespace.registerTags(tags);
 		}
