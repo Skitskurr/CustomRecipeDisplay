@@ -9,6 +9,11 @@ import org.bukkit.Material;
 import com.versuchdrei.customrecipedisplay.recipe.ingredient.Ingredient;
 import com.versuchdrei.customrecipedisplay.recipe.ingredient.TagIngredient;
 
+/**
+ * a class for representing a tag
+ * @author VersuchDrei
+ * @version 1.0
+ */
 public class Tag {
 
 	private final Set<Material> types = new HashSet<>();
